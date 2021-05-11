@@ -62,14 +62,14 @@ RSpec.describe User, type: :model do
     end
 
     it 'last_nameが全角入力(漢字、ひらがな、カタカナ)で登録できること' do
-      @user.last_name = "亜あア"
+      @user.last_name = '亜あア'
       expect(@user).to be_valid
     end
 
     it 'last_nameが全角入力でなければ登録できないこと' do
-      @user.last_name = "ｱｱｱ"
+      @user.last_name = 'ｱｱｱ'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Last name is invalid")
+      expect(@user.errors.full_messages).to include('Last name is invalid')
     end
 
     it 'first_nameが空では登録できないこと' do
@@ -79,14 +79,14 @@ RSpec.describe User, type: :model do
     end
 
     it 'first_nameが全角入力(漢字、ひらがな、カタカナ)で登録できること' do
-      @user.first_name = "亜あア"
+      @user.first_name = '亜あア'
       expect(@user).to be_valid
     end
 
     it 'first_nameが全角入力でなければ登録できないこと' do
-      @user.first_name = "ｱｱｱ"
+      @user.first_name = 'ｱｱｱ'
       @user.valid?
-      expect(@user.errors.full_messages).to include("First name is invalid")
+      expect(@user.errors.full_messages).to include('First name is invalid')
     end
 
     it 'ruby_last_nameが空では登録できないこと' do
@@ -96,20 +96,20 @@ RSpec.describe User, type: :model do
     end
 
     it 'ruby_last_nameが全角入力(カタカナ)で登録できること' do
-      @user.ruby_last_name = "アアア"
+      @user.ruby_last_name = 'アアア'
       expect(@user).to be_valid
     end
 
     it 'ruby_last_nameが全角入力(漢字、ひらがな)で登録できないこと' do
-      @user.ruby_last_name = "亜あ"
+      @user.ruby_last_name = '亜あ'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Ruby last name is invalid")
+      expect(@user.errors.full_messages).to include('Ruby last name is invalid')
     end
 
     it 'ruby_last_nameが全角入力でなければ登録できないこと' do
-      @user.ruby_last_name = "ｱｱｱ"
+      @user.ruby_last_name = 'ｱｱｱ'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Ruby last name is invalid")
+      expect(@user.errors.full_messages).to include('Ruby last name is invalid')
     end
 
     it 'ruby_first_nameが空では登録できないこと' do
@@ -119,20 +119,20 @@ RSpec.describe User, type: :model do
     end
 
     it 'ruby_first_nameが全角入力(カタカナ)で登録できること' do
-      @user.ruby_first_name = "アアア"
+      @user.ruby_first_name = 'アアア'
       expect(@user).to be_valid
     end
 
     it 'ruby_first_nameが全角入力(漢字、ひらがな)で登録できないこと' do
-      @user.ruby_first_name = "亜あ"
+      @user.ruby_first_name = '亜あ'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Ruby first name is invalid")
+      expect(@user.errors.full_messages).to include('Ruby first name is invalid')
     end
 
     it 'ruby_first_nameが全角入力でなければ登録できないこと' do
-      @user.ruby_first_name = "ｱｱｱ"
+      @user.ruby_first_name = 'ｱｱｱ'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Ruby first name is invalid")
+      expect(@user.errors.full_messages).to include('Ruby first name is invalid')
     end
 
     it 'birthdayが空では登録できないこと' do
@@ -140,7 +140,6 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Birthday can't be blank")
     end
-
   end
 end
 
