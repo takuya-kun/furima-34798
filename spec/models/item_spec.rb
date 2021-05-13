@@ -17,7 +17,7 @@ RSpec.describe Item, type: :model do
       end
 
       it 'priceが半角入力(数字)で保存できること' do
-        @item.price = 9999999
+        @item.price = 9_999_999
         expect(@item).to be_valid
       end
     end
@@ -96,7 +96,7 @@ RSpec.describe Item, type: :model do
       end
 
       it 'priceが9,999,999より大きいと保存できないこと' do
-        @item.price = 10000000
+        @item.price = 10_000_000
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
