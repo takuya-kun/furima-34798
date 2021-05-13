@@ -7,7 +7,6 @@ RSpec.describe User, type: :model do
     end
 
     context 'ユーザー新規登録ができる時' do
-
       it '入力必須項目が全て存在すれば登録できること' do
         expect(@user).to be_valid
       end
@@ -37,11 +36,9 @@ RSpec.describe User, type: :model do
         @user.ruby_first_name = 'アアア'
         expect(@user).to be_valid
       end
-
     end
-  
+
     context 'ユーザー新規登録ができない時' do
-      
       it 'nicknameが空では登録できないこと' do
         @user.nickname = ''
         @user.valid?
@@ -57,7 +54,7 @@ RSpec.describe User, type: :model do
       it 'emailが＠を含まない場合登録できないこと' do
         @user.email = 'abc'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Email is invalid")
+        expect(@user.errors.full_messages).to include('Email is invalid')
       end
 
       it '重複したemailが存在する場合登録できないこと' do
