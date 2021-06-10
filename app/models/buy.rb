@@ -3,5 +3,7 @@ class Buy < ApplicationRecord
   belongs_to :user
   belongs_to :item
 
-  attr_accessor :token
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :prefecture
+
 end
