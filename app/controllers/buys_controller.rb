@@ -1,6 +1,7 @@
 class BuysController < ApplicationController
   before_action :authenticate_user!
   before_action :root_redirect
+  before_action :root_redirect_done
 
   def index
     @item = Item.find(params[:item_id])
@@ -36,6 +37,11 @@ class BuysController < ApplicationController
   def root_redirect
     @item = Item.find(params[:item_id])
     redirect_to root_path unless current_user.id != @item.user_id
+  end
+
+  def root_redirect_done
+    @buy = Buy.find(params[:item_id])
+    redirect_to root_path unless @item.user_id == nil
   end
 
 end
