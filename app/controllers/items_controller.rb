@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :pull_item_params, except: [:index, :new, :create]
   before_action :root_redirect, except: [:index, :new, :create, :show]
+  before_action :root_redirect_done, except: [:index, :new, :create, :show, :destroy]
 
   def index
     @items = Item.all.order('created_at DESC')
@@ -53,4 +54,13 @@ class ItemsController < ApplicationController
   def root_redirect
     redirect_to root_path unless current_user.id == @item.user_id
   end
+
+  def root_redirect_done
+    if current_user.id == @item.user_id
+      if @item.buy != nil
+        redirect_to root_path
+      end
+    end
+  end
+
 end
