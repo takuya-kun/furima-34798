@@ -71,6 +71,7 @@ RSpec.describe BuyAddress, type: :model do
       it 'phone_numberが半角入力(数字)で12桁以上だと保存できないこと' do
         @buy_address.phone_number = '123456789012'
         @buy_address.valid?
+        expect(@buy_address.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
       end
       it 'phone_numberが全角だと保存できないこと' do
         @buy_address.phone_number = '１２３４５６７８９０１'
