@@ -8,7 +8,7 @@ class BuyAddress
     validates :prefecture_id, numericality: { other_than: 1 }
     validates :city
     validates :house_number
-    validates :phone_number, format: { with: /\A\d{11}\z/ }
+    validates :phone_number, format: { with: /\A[0-9]+\z/, length: { in: 1..11 } }
     validates :item_id
     validates :user_id
   end

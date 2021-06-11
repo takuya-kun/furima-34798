@@ -3,7 +3,10 @@ require 'rails_helper'
 RSpec.describe BuyAddress, type: :model do
   describe '購入情報の保存' do
     before do
-      @buy_address = FactoryBot.build(:buy_address)
+      item = FactoryBot.create(:item)
+      user = FactoryBot.create(:user)
+      @buy_address = FactoryBot.build(:buy_address, item_id: item.id, user_id: user.id)
+      sleep(1)
     end
 
     context '内容に問題ない場合' do
@@ -46,9 +49,9 @@ RSpec.describe BuyAddress, type: :model do
         expect(@buy_address.errors.full_messages).to include('Postal code is invalid')
       end
       it 'prefecture_idが空だと保存できないこと' do
-        @buy_address.prefecture_id = ''
+        @buy_address.prefecture_id = 1
         @buy_address.valid?
-        expect(@buy_address.errors.full_messages).to include("Prefecture can't be blank")
+        expect(@buy_address.errors.full_messages).to include("Prefecture must be other than 1")
       end
       it 'cityが空だと保存できないこと' do
         @buy_address.city = ''
@@ -65,15 +68,24 @@ RSpec.describe BuyAddress, type: :model do
         @buy_address.valid?
         expect(@buy_address.errors.full_messages).to include("Phone number can't be blank")
       end
-      it 'phone_numberが半角数字で正しい形式でないと保存できないこと' do
-        @buy_address.phone_number = '1234567890'
+      it 'phone_numberが半角入力(数字)で12桁以上だと保存できないこと' do
+        @buy_address.phone_number = '123456789012'
         @buy_address.valid?
-        expect(@buy_address.errors.full_messages).to include('Phone number is invalid')
       end
       it 'phone_numberが全角だと保存できないこと' do
         @buy_address.phone_number = '１２３４５６７８９０１'
         @buy_address.valid?
-        expect(@buy_address.errors.full_messages).to include('Phone number is invalid')
+        expect(@buy_address.errors.full_messages).to include("Phone number is invalid")
+      end
+      it 'user_idが空だと保存できないこと' do
+        @buy_address.user_id = ''
+        @buy_address.valid?
+        expect(@buy_address.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item_idが空だと保存できないこと' do
+        @buy_address.item_id = ''
+        @buy_address.valid?
+        expect(@buy_address.errors.full_messages).to include("Item can't be blank")
       end
     end
   end

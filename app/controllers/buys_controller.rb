@@ -1,15 +1,13 @@
 class BuysController < ApplicationController
   before_action :authenticate_user!
-  before_action :root_redirect
+  before_action :pull_item_params
   before_action :root_redirect_done
 
   def index
-    @item = Item.find(params[:item_id])
     @buy_address = BuyAddress.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @buy_address = BuyAddress.new(buy_params)
     if @buy_address.valid?
       buy_item
@@ -37,12 +35,11 @@ class BuysController < ApplicationController
     )
   end
 
-  def root_redirect
+  def pull_item_params
     @item = Item.find(params[:item_id])
-    redirect_to root_path unless current_user.id != @item.user_id
   end
 
   def root_redirect_done
-    redirect_to root_path if current_user.id == (@item.user_id) && !@item.buy.nil?
+    redirect_to root_path if current_user.id == (@item.user_id) || !@item.buy.nil?
   end
 end
