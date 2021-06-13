@@ -1,5 +1,6 @@
 function post (){
   const itemPrice = document.getElementById("item-price");
+  if (!itemPrice){ return false;}
   itemPrice.addEventListener('input', function(){
     const itemPriceValue = itemPrice.value
     const Tax = 0.1;
